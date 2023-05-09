@@ -242,7 +242,7 @@ print(score)
 
 
 #coefficients
-print(lr.intercept_)
+print(lr.intercept_)z
 print(lr.coef_)
 
 #Afficher l'equation
@@ -251,7 +251,7 @@ list(zip(feature_cols, lr.coef_))
 from sklearn import metrics# RMSE
 print(np.sqrt(metrics.mean_squared_error(y_test,
                                          pred)))
-##############################################################################
+#################################################################
 
 # RMSE
 mse = np.sqrt(metrics.mean_squared_error(y_test,
@@ -268,78 +268,3 @@ with open("metrics.txt", 'w') as outfile:
         outfile.write("MSE:  {0:2.1f} \n".format(mse))
         outfile.write("R2: {0:2.1f}\n".format(r2))
 
-# Set up a dict for paramter distribution
-param_dist = {'n_estimators': [50, 150, 200, 250], 
-              'criterion': ['gini', 'entropy'], 
-              'max_depth': [2, 8, 12, 16],
-              'min_samples_split': [2, 4, 8, 10],
-              'min_samples_leaf': [2, 5, 8, 10]}
-
-
-# Create scorer 
-mae_scorer = make_scorer(mean_absolute_error)
-
-# Intantiate the Random Forest Classifier
-rfc = RandomForestClassifier()
-
-# Instantiate Random Search 
-rs = RandomizedSearchCV(estimator=rfc, param_distributions=param_dist, n_iter=20, cv=5, scoring=mae_scorer)
-
-# Fit the pipeline to the training data
-rs.fit(X_train, y_train)
-
-RandomizedSearchCV(cv=5, estimator=RandomForestClassifier(), n_iter=20,
-                   param_distributions={'criterion': ['gini', 'entropy'],
-                                        'max_depth': [2, 8, 12, 16],
-                                        'min_samples_leaf': [2, 5, 8, 10],
-                                        'min_samples_split': [2, 4, 8, 10],
-                                        'n_estimators': [50, 150, 200, 250]},
-                   scoring=make_scorer(mean_absolute_error))
-
-# print the mean test scores:
-print('The accuracy for each run was: {}.'.format(rs.cv_results_['mean_test_score']))
-
-# print the best model score:
-print('The best accuracy for a single model was: {}'.format(rs.best_score_))
-
-# print the best model score:
-print('The best parameters for a single model was: {}'.format(rs.best_params_))
-
-RandomForest = RandomForestClassifier(n_estimators=200, min_samples_split=4, min_samples_leaf=2, max_depth=12, criterion='gini')
-
-RandomForest.fit(X_train, y_train)
-
-pred = RandomForest.predict(X_test)
-
-# View accuracy score
-print(accuracy_score(y_test, pred))
-
-y_pred_prob = RandomForest.predict_proba(X_test)[:,1]
-
-# Generate ROC curve values
-fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
-
-# Plot a ROC curve
-plt.plot([0, 1], [0, 1], 'k--')
-plt.plot(fpr, tpr)
-
-plt.xlabel('False Positive Rate', color="r")
-plt.ylabel('True Positive Rate', color="g")
-
-plt.title('ROC Curve')
-plt.show()
-
-import pickle
-with open('modele_LR1.pkl', 'wb') as fout:
-  # fout.write(lm.intercept_)
-  # fout.write(lm.coef_[0])
-  # fout.write(lm.coef_[1])
-  # fout.write(lm.coef_[2])
-  # fout.write(lm.coef_[3])
-  # fout.write(lm.coef_[4])
-  # fout.write(lm.coef_[5])
-  # fout.write(lm.coef_[6])
-  # fout.write(lm.coef_[7])
-  # fout.write(lm.coef_[8])
-  # fout.write(lm.coef_[9])
-  pickle.dump(lr,fout)
