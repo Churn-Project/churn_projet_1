@@ -252,9 +252,21 @@ from sklearn import metrics# RMSE
 print(np.sqrt(metrics.mean_squared_error(y_test,
                                          pred)))
 
+# RMSE
+mse = np.sqrt(metrics.mean_squared_error(y_test,
+                                        pred))
+print(np.sqrt(metrics.mean_squared_error(y_test,
+                                        pred)))
+
 #Calcul du R-squared
 r2 = metrics.r2_score(y_test, pred)
 print(r2)
+
+# Write scores to a file
+with open("metrics.txt", 'w') as outfile:
+        outfile.write("MSE:  {0:2.1f} \n".format(mse))
+        outfile.write("R2: {0:2.1f}\n".format(r2))
+
 
 
 
