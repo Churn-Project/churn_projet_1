@@ -248,20 +248,7 @@ print(lr.coef_)
 #Afficher l'equation
 list(zip(feature_cols, lr.coef_))
 
-from sklearn import metrics# RMSE
-print(np.sqrt(metrics.mean_squared_error(y_test,
-                                         pred)))
-##############################################################################
 
-# RMSE
-mse = np.sqrt(metrics.mean_squared_error(y_test,
-                                        pred))
-print(np.sqrt(metrics.mean_squared_error(y_test,
-                                        pred)))
-
-#Calcul du R-squared
-r2 = metrics.r2_score(y_test, pred)
-print(r2)
 
 # Write scores to a file
 with open("metrics.txt", 'w') as outfile:
@@ -328,18 +315,17 @@ plt.ylabel('True Positive Rate', color="g")
 
 plt.title('ROC Curve')
 plt.show()
+from sklearn import metrics# RMSE
+print(np.sqrt(metrics.mean_squared_error(y_test,
+                                         pred)))
+##############################################################################
 
-import pickle
-with open('modele_LR1.pkl', 'wb') as fout:
-  # fout.write(lm.intercept_)
-  # fout.write(lm.coef_[0])
-  # fout.write(lm.coef_[1])
-  # fout.write(lm.coef_[2])
-  # fout.write(lm.coef_[3])
-  # fout.write(lm.coef_[4])
-  # fout.write(lm.coef_[5])
-  # fout.write(lm.coef_[6])
-  # fout.write(lm.coef_[7])
-  # fout.write(lm.coef_[8])
-  # fout.write(lm.coef_[9])
-  pickle.dump(lr,fout)
+# RMSE
+mse = np.sqrt(metrics.mean_squared_error(y_test,
+                                        pred))
+print(np.sqrt(metrics.mean_squared_error(y_test,
+                                        pred)))
+
+#Calcul du R-squared
+r2 = metrics.r2_score(y_test, pred)
+print(r2)
