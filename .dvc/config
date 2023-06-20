@@ -1,0 +1,4 @@
+[core]
+    remote = maremote
+['remote "maremote"']
+    url = gdrive://1V58PsYZ8DKYl-itOmg05tCDjsDv2MEiV
